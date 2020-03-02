@@ -22,12 +22,21 @@ def pca_to_grey(image):
     return grey
 
 def create_point_cloud(image):
-    data = pca_to_grey(image)
-    critical_points =[]
+    post_pca_image = pca_to_grey(image)
 
-    for line in data:
-        critical_points.append([0 if  d >= 100 else d for d in line])
-    #TODO: Make scatter plot off of locations of critical points
-    point_cloud = []
-    point_cloud = np.array(point_cloud)
+    rows, columns = post_pca_image.shape
+
+    points_x = []
+    points_y = []
+
+    for x in range(rows):
+        for y in range(columns):
+            val = 255 - post_pca_image[x,y]
+            val = val // 10
+
+            for _ in range(val):
+                points_x.append(x)
+                points_y.append(y)
+
+    point_cloud = np.array([points_x, points_y]).T
     return point_cloud
