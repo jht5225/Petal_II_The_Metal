@@ -4,11 +4,13 @@ Created on Sun Feb  9 15:04:44 2020
 
 @authors: Abbey Felley, Jack Taylor
 """
-
 import cv2
 import numpy as np
 
 def pca_to_grey(image):
+    """
+    Uses principal component analysis to convert the given image to greyscale along the most appropriate axis.
+    """
     x,y,z = image.shape
     mat = image.reshape([x*y,z])
 
